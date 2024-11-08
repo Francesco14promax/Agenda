@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda Colorata</title>
+    
+    <!-- Collegamento al file manifest.json -->
+    <link rel="manifest" href="manifest.json">
+
+    <style>
+        /* Stili generali */
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+            background-color: #f0f8ff;
+        }
+
+        /* Container principale */
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        /* Titolo */
+        h2 {
+            color: #4a90e2;
+            margin-bottom: 20px;
+        }
+
+        /* Input e bottone */
+        input, button, textarea {
+            width: 100%;
+            margin: 8px 0;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        /* Bottone stilizzato */
+        button {
+            background-color: #4a90e2;
+            color: #ffffff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #357ABD;
+        }
+
+        /* Stile per lista degli impegni */
+        .agenda-list {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .agenda-item {
+            background: #e8f4ff;
+            padding: 10px;
+            border: 1px solid #4a90e2;
+            border-left: 6px solid #4a90e2;
+            margin-top: 10px;
+            border-radius: 8px;
+            color: #333;
+        }
+
+        /* Data e testo degli impegni */
+        .agenda-item strong {
+            color: #4a90e2;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Agenda Colorata</h2>
+    
+    <label for="date">Data:</label>
+    <input type="date" id="date">
+    
+    <label for="note">Impegno:</label>
+    <textarea id="note" rows="3" placeholder="Inserisci l'impegno..."></textarea>
+    
+    <button onclick="addNote()">Aggiungi Impegno</button>
+    
+    <div class="agenda-list" id="agendaList"></div>
+</div>
+
+<script>
+    // Funzione per aggiungere una nota all'agenda
+    function addNote() {
+        const date = document.getElementById('date').value;
+        const note = document.getElementById('note').value;
+        
+        if (date && note) {
+            // Recupera l'elemento della lista dell'agenda
+            const agendaList = document.getElementById('agendaList');
+            
+            // Crea un nuovo elemento per l'impegno
+            const agendaItem = document.createElement('div');
+            agendaItem.classList.add('agenda-item');
+            agendaItem.innerHTML = `<strong>${date}</strong>: ${note}`;
+            
+            // Aggiunge l'impegno alla lista
+            agendaList.appendChild(agendaItem);
+            
+            // Pulisce i campi
+            document.getElementById('date').value = '';
+            document.getElementById('note').value = '';
+        } else {
+            alert('Inserisci una data e un impegno!');
+        }
+    }
+</script>
+
+</body>
+</html>
